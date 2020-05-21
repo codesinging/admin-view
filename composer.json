@@ -1,0 +1,24 @@
+{
+    "name": "codesinging/admin-view",
+    "description": "A package to build administrative web UI with PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codesinging",
+            "email": "codesinging@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeSinging\\AdminView\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeSinging\\AdminView\\Tests\\": "tests"
+        }
+    }
+}
