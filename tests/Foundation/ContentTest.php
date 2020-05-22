@@ -23,9 +23,8 @@ class ContentTest extends TestCase
     public function testAddNull()
     {
         $content = new Content(null, null);
-        $content->glue(',');
-        self::assertSame([null, null], $content->all());
-        self::assertFalse($content->isEmpty());
+        self::assertSame([], $content->all());
+        self::assertTrue($content->isEmpty());
         self::assertEmpty($content->build());
     }
 

@@ -9,6 +9,7 @@
 namespace CodeSinging\AdminView\Foundation;
 
 use Closure;
+use CodeSinging\AdminView\Support\Arr;
 
 class Content extends Buildable
 {
@@ -58,6 +59,20 @@ class Content extends Buildable
     }
 
     /**
+     * Remove all content items which is null.
+     *
+     * @param array $contents
+     *
+     * @return array
+     */
+    protected function filter(array $contents)
+    {
+        return array_filter($contents, function ($content) {
+            return !is_null($content);
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    /**
      * Add contents to the content flow.
      *
      * @param string|Buildable|Closure ...$contents
@@ -66,6 +81,7 @@ class Content extends Buildable
      */
     public function add(...$contents)
     {
+        $contents = $this->filter($contents);
         $this->items = array_merge($this->items, $contents);
         return $this;
     }
@@ -79,6 +95,7 @@ class Content extends Buildable
      */
     public function prepend(...$contents)
     {
+        $contents = $this->filter($contents);
         $this->items = array_merge($contents, $this->items);
         return $this;
     }
