@@ -40,6 +40,29 @@ class ArrTest extends TestCase
         $this->assertFalse(Arr::exists(['a' => 1], 0));
     }
 
+    public function testFlatten()
+    {
+        // Flat arrays are unaffected
+        $array = ['#foo', '#bar', '#baz'];
+        $this->assertEquals(['#foo', '#bar', '#baz'], Arr::flatten($array));
+
+        // Nested arrays are flattened with existing flat items
+        $array = [['#foo', '#bar'], '#baz'];
+        $this->assertEquals(['#foo', '#bar', '#baz'], Arr::flatten($array));
+
+        // Flattened array includes "null" items
+        $array = [['#foo', null], '#baz', null];
+        $this->assertEquals(['#foo', null, '#baz', null], Arr::flatten($array));
+
+        // Sets of nested arrays are flattened
+        $array = [['#foo', '#bar'], ['#baz']];
+        $this->assertEquals(['#foo', '#bar', '#baz'], Arr::flatten($array));
+
+        // Deeply nested arrays are flattened
+        $array = [['#foo', ['#bar']], ['#baz']];
+        $this->assertEquals(['#foo', '#bar', '#baz'], Arr::flatten($array));
+    }
+
     public function testGet()
     {
         $array = ['products.desk' => ['price' => 100]];

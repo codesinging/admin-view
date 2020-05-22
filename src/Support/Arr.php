@@ -42,11 +42,40 @@ class Arr
     }
 
     /**
+     * Flatten a multi-dimensional array into a single level.
+     *
+     * @param iterable $array
+     * @param int      $depth
+     *
+     * @return array
+     */
+    public static function flatten($array, $depth = INF)
+    {
+        $result = [];
+
+        foreach ($array as $item) {
+            if (!is_array($item)) {
+                $result[] = $item;
+            } else {
+                $values = $depth === 1
+                    ? array_values($item)
+                    : static::flatten($item, $depth - 1);
+
+                foreach ($values as $value) {
+                    $result[] = $value;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Get an item from an array using "dot" notation.
      *
      * @param \ArrayAccess|array $array
-     * @param string|int|null $key
-     * @param mixed $default
+     * @param string|int|null    $key
+     * @param mixed              $default
      *
      * @return mixed
      */
