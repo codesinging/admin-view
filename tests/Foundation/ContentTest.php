@@ -58,7 +58,7 @@ class ContentTest extends TestCase
     {
         $content = new Content(null, 'a', null);
         $content->glue(',');
-        self::assertSame([null, 'a', null], $content->all());
+        self::assertSame(['a'], $content->all());
         self::assertSame('a', $content->build());
     }
 
@@ -145,7 +145,6 @@ class ContentTest extends TestCase
 
 class Example extends Buildable
 {
-
     protected $content;
 
     public function __construct(string $content = null)
