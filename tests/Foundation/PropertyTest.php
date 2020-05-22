@@ -129,6 +129,11 @@ class PropertyTest extends TestCase
         self::assertEquals(':disabled="false"', new Property(':disabled', 'false'));
     }
 
+    public function testBuildNameStartsWithColonAndValueIsNull()
+    {
+        self::assertEquals(':disabled="true"', new Property(':disabled'));
+    }
+
     public function testBuildNameStartsWithColonAndValueStartsWithColon()
     {
         self::assertEquals(':title="title"', new Property(':title', ':title'));
