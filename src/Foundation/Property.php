@@ -81,8 +81,8 @@ class Property extends Buildable
         } elseif ($this->isBind === true && is_null($value)) {
             $this->value = 'true';
         } elseif (is_int($value) || is_float($value) || is_double($value)) {
+            $this->value = (string)$value;
             $this->isBind = true;
-            $this->value = $value;
         } elseif (is_array($value)) {
             $this->value = json_encode($value);
             $this->isBind = true;
