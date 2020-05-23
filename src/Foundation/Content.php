@@ -26,7 +26,7 @@ class Content extends Buildable
     /**
      * Content constructor.
      *
-     * @param string|Buildable|Closure ...$contents
+     * @param string|array|Buildable|Closure ...$contents
      */
     public function __construct(...$contents)
     {
@@ -75,12 +75,13 @@ class Content extends Buildable
     /**
      * Add contents to the content flow.
      *
-     * @param string|Buildable|Closure ...$contents
+     * @param string|array|Buildable|Closure ...$contents
      *
      * @return $this
      */
     public function add(...$contents)
     {
+        $contents = Arr::flatten($contents);
         $contents = $this->filter($contents);
         $this->items = array_merge($this->items, $contents);
         return $this;
@@ -89,12 +90,13 @@ class Content extends Buildable
     /**
      * Prepend contents to the beginning of the content flow.
      *
-     * @param string|Buildable|Closure ...$contents
+     * @param string|array|Buildable|Closure ...$contents
      *
      * @return $this
      */
     public function prepend(...$contents)
     {
+        $contents = Arr::flatten($contents);
         $contents = $this->filter($contents);
         $this->items = array_merge($contents, $this->items);
         return $this;

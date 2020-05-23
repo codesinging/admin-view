@@ -70,6 +70,14 @@ class ContentTest extends TestCase
         self::assertSame('a,,b', $content->build());
     }
 
+    public function testAddArray()
+    {
+        self::assertEquals(['a', 'b', 'c'], (new Content(['a', 'b', 'c']))->all());
+        self::assertEquals(['a', 'b', 'c'], (new Content(['a', 'b'], 'c'))->all());
+        self::assertEquals(['a', 'b', 'c'], (new Content(['a', 'b'], ['c']))->all());
+        self::assertEquals(['a', 'b', 'c'], (new Content(['a', ['b']], ['c']))->all());
+    }
+
     public function testAddClosure()
     {
         self::assertSame('ab', (new Content(function () {
