@@ -18,9 +18,9 @@ class Attribute extends Buildable
     /**
      * Attribute constructor.
      *
-     * @param array $attributes
+     * @param array|null $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         $this->set($attributes);
     }

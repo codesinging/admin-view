@@ -24,6 +24,14 @@ class AttributeTest extends TestCase
         self::assertEquals('title="Title"', (new Attribute())->add('title', 'Title'));
     }
 
+    public function testSetNameIsEmpty()
+    {
+        self::assertEquals([], (new Attribute())->set(null)->all());
+        self::assertEquals([], (new Attribute())->set([])->all());
+        self::assertEquals('', (new Attribute())->set(null)->build());
+        self::assertEquals('', (new Attribute())->set([])->build());
+    }
+
     public function testSetNameIsString()
     {
         self::assertEquals('title="Title"', (new Attribute())->set('title', 'Title'));
