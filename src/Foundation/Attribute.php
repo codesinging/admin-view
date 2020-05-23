@@ -18,11 +18,13 @@ class Attribute extends Buildable
     /**
      * Attribute constructor.
      *
-     * @param array|null $attributes
+     * @param array ...$attributes
      */
-    public function __construct(array $attributes = null)
+    public function __construct(...$attributes)
     {
-        $this->set($attributes);
+        foreach ($attributes as $attribute) {
+            $this->set($attribute);
+        }
     }
 
     /**

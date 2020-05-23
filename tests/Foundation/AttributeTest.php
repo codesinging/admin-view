@@ -19,6 +19,11 @@ class AttributeTest extends TestCase
         self::assertEquals(':id="1" title="Title"', (new Attribute(['id' => 1, 'title' => 'Title']))->build());
     }
 
+    public function testConstructWithMultipleParams()
+    {
+        self::assertEquals(':id="1" title="Title"', (new Attribute(['id' => 1], ['title' => 'Title']))->build());
+    }
+
     public function testAdd()
     {
         self::assertEquals('title="Title"', (new Attribute())->add('title', 'Title'));
