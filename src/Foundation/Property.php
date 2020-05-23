@@ -12,7 +12,6 @@ use CodeSinging\AdminView\Support\Str;
 
 class Property extends Buildable
 {
-
     /**
      * @var string Property name.
      */
