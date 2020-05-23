@@ -24,9 +24,15 @@ class BuilderTest extends TestCase
         self::assertEquals('<span></span>', (new Builder())->tag('span'));
     }
 
-    public function testSet()
+    public function testContent()
     {
-        self::assertEquals('<div id="app"></div>', (new Builder())->set('id', 'app'));
+        self::assertEquals('<div>hello</div>', (new Builder())->content('hello'));
+    }
+
+    public function testAttribute()
+    {
+        self::assertEquals('<div></div>', (new Builder())->attribute());
+        self::assertEquals('<div id="app"></div>', (new Builder())->attribute('id="app"'));
     }
 
     public function testClosing()

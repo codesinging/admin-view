@@ -18,12 +18,12 @@ class Builder extends Buildable
     protected $tag = '';
 
     /**
-     * @var Attribute The builder's Attribute instance.
+     * @var string The builder's attribute.
      */
-    protected $attribute;
+    protected $attributes;
 
     /**
-     * @var Content The builder's Content instance.
+     * @var string The builder's content.
      */
     protected $content;
 
@@ -45,17 +45,17 @@ class Builder extends Buildable
     /**
      * Builder constructor.
      *
-     * @param string                 $tag
-     * @param string|Builder|Closure $content
-     * @param array                  $attributes
-     * @param bool                   $closing
-     * @param bool                   $linebreak
+     * @param string $tag
+     * @param string $content
+     * @param string $attributes
+     * @param bool   $closing
+     * @param bool   $linebreak
      */
-    public function __construct(string $tag = 'div', $content = null, array $attributes = [], bool $closing = true, bool $linebreak = false)
+    public function __construct(string $tag = 'div', string $content = '', string $attributes = '', bool $closing = true, bool $linebreak = false)
     {
         $this->tag($tag);
-        $this->content = new Content($content);
-        $this->attribute = new Attribute($attributes);
+        $this->content($content);
+        $this->attribute($attributes);
         $this->closing($closing);
         $this->linebreak($linebreak);
 
@@ -76,17 +76,28 @@ class Builder extends Buildable
     }
 
     /**
-     * Set builder attributes.
+     * Set builder's content.
      *
-     * @param string|array $name
-     * @param mixed        $value
-     * @param mixed        $default
+     * @param string|null $content
      *
      * @return $this
      */
-    public function set($name, $value = null, $default = null)
+    public function content(string $content = null)
     {
-        $this->attribute->set($name, $value, $default);
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * Set builder attributes.
+     *
+     * @param string|null $attributes
+     *
+     * @return $this
+     */
+    public function attribute(string $attributes = null)
+    {
+        $this->attributes = $attributes;
         return $this;
     }
 
@@ -151,10 +162,10 @@ class Builder extends Buildable
         return sprintf(
             '<%s%s%s>%s%s%s%s',
             $this->tag,
-            $this->attribute->isEmpty() ? '' : ' ' . $this->attribute->build(),
+            empty($this->attributes) ? '' : ' ' . $this->attributes,
             $this->closing ? '' : ' /',
-            $this->linebreak && !$this->content->isEmpty() ? PHP_EOL : '',
-            $this->content->build(),
+            $this->linebreak && !empty($this->content) ? PHP_EOL : '',
+            $this->content,
             $this->linebreak && $this->closing ? PHP_EOL : '',
             $this->closing ? '</' . $this->tag . '>' : ''
         );
